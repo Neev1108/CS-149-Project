@@ -1,0 +1,11 @@
+{
+    "java.project.sourcePaths": [
+        "CS149/src"
+    ],
+    "java.home": "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home",
+
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "CS149/lib/junit-platform-console-standalone-1.8.0-M1.jar"
+    ]
+}
