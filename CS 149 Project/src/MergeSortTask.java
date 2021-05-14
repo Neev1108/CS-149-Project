@@ -10,11 +10,12 @@ public class MergeSortTask extends RecursiveAction {
         this.array = array;
         this.start = start;
         this.end = end;
+        this.threshold = array.length / 10;
     }
 
     protected void compute() {
         if (end - start <= threshold) {
-            this.array = InsertionSort(array);
+            InsertionSort(array);
         } else {
             int middle = (end + start) / 2;
 
@@ -28,7 +29,7 @@ public class MergeSortTask extends RecursiveAction {
 
     private void merge(int middle) {
         if (this.array[middle - 1] < this.array[middle]) {
-            return; // the arrays are already correctly sorted, so we can skip the merge
+            return;
         }
         int[] copy = new int[this.end - this.start];
         System.arraycopy(array, this.start, copy, 0, copy.length);
@@ -45,7 +46,7 @@ public class MergeSortTask extends RecursiveAction {
         }
     }
 
-    public int[] InsertionSort(int [] arr){
+    public void InsertionSort(int [] arr){
         int n = arr.length;
         for (int i = 1; i < n; ++i) {
             int key = arr[i];
@@ -56,9 +57,9 @@ public class MergeSortTask extends RecursiveAction {
             }
             arr[j + 1] = key;
         }
-        return arr;
+    
     }
-    }
+}
 
 
 

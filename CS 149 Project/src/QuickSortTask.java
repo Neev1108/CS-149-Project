@@ -4,49 +4,56 @@ public class QuickSortTask extends RecursiveAction {
     int[] array;
     int left;
     int right;
-    int threshold = 100;
+    int threshold;
 
     public QuickSortTask(int[] array, int left, int right) {
         this.array = array;
         this.left = left;
         this.right = right;
+        this.threshold = array.length/5;
     }
 
     protected void compute() {
         if (right - left <= threshold) {
-            this.array = InsertionSort(array);
+            InsertionSort(array);
         } else {
+            if (left < right){
             int pivot = partition(array, left, right);
 
             QuickSortTask subTask1 = new QuickSortTask(array, left, pivot - 1);
             QuickSortTask subTask2 = new QuickSortTask(array, pivot + 1, right);
-            invokeAll(subTask1, subTask2);
-            subTask1.fork();
-            subTask2.compute();
-            subTask1.join();
+
+            invokeAll(subTask1,subTask2);
+        }
 
         }
     }
 
-    int partition(int[] a, int p, int r) {
-        int i = p - 1;
-        int x = a[r];
-        for (int j = p; j < r; j++) {
-          if (a[j] < x) {
+    static int partition(int[] arr, int low, int high)
+{
+    int pivot = arr[high];
+    int i = (low - 1);
+ 
+    for(int j = low; j <= high - 1; j++)
+    {
+        if (arr[j] < pivot)
+        {
             i++;
-            int temp = a[i];
-            a[i] = a[j];
-            a[j] = temp;
-          }
+            swap(arr, i, j);
         }
-        i++;
-        int temp = a[i];
-        a[i] = a[r];
-        a[r] = temp;
-        return i;
-      }
+    }
+    swap(arr, i + 1, high);
+    return (i + 1);
+}
 
-      public int[] InsertionSort(int [] arr){
+static void swap(int[] arr, int i, int j)
+{
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+      public void InsertionSort(int [] arr){
         int n = arr.length;
         for (int i = 1; i < n; ++i) {
             int key = arr[i];
@@ -57,7 +64,6 @@ public class QuickSortTask extends RecursiveAction {
             }
             arr[j + 1] = key;
         }
-        return arr;
     }
 
 }
