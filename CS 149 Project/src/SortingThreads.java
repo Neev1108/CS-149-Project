@@ -27,7 +27,7 @@ public class SortingThreads {
 
         long timeElapsed = finish - begin;
         System.out.println("Multithreaded Merge Sort (After Sorted): \n");
-        //printArray(array);
+        printArray(array);
         System.out.println("Time Elapsed for MultiThreaded Merge Sort: " + timeElapsed + "ms\n");
 
         long begin1 = System.currentTimeMillis();    
@@ -36,8 +36,8 @@ public class SortingThreads {
         task2.join();
         long finish1 = System.currentTimeMillis();
         long timeElapsed1 = finish1 - begin1;
-        // System.out.println("Multithreaded Quick Sort (After Sorted): \n");
-        // printArray(before_array);
+        System.out.println("Multithreaded Quick Sort (After Sorted): \n");
+        printArray(before_array);
         System.out.println("Time Elapsed for MultiThreaded Quick Sort: " + timeElapsed1 + "ms\n");
 
     }

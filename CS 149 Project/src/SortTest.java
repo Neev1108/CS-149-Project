@@ -6,13 +6,13 @@ public class SortTest {
     
     public static void main(String args[]){
         ForkJoinPool pool = new ForkJoinPool();
-        int [] arr = randomArray(55000);
+        int [] arr = randomArray(100);
         int [] before_array = arr;
         int [] before_before_array = arr;
 
 
         System.out.print("\nArray before sorted: \n\n");
-        // printArray(arr);
+        printArray(arr);
         
         SortingThreads task = new SortingThreads(arr, 0, arr.length-1, pool);
         task.sort();
